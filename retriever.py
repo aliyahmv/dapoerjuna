@@ -8,7 +8,7 @@ from tools import df, build_block
 load_dotenv()
 
 INDEX_DIR = "database/faiss_recipes_index"
-CSV_PATH = "data/df_resep_cleaned.csv"
+CSV_PATH = "database/df_resep_cleaned.csv"
 
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
