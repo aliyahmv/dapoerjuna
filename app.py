@@ -124,7 +124,6 @@ elif page == "📊 Dashboard Analisis":
         diet_counts = df_filtered["diet"].value_counts()
         fig2, ax2 = plt.subplots(figsize=(7, 7))
         ax2.pie(diet_counts, labels=diet_counts.index, autopct="%1.1f%%", startangle=140, colors=["#ffcc99", "#c2c2f0"])
-        st.pyplot(fig2)
         ax2.axis("equal")
         st.pyplot(fig2)
 
