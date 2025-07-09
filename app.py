@@ -114,7 +114,7 @@ elif page == "📊 Dashboard Analisis":
     with col3:
         st.subheader("📌 Tingkat Kesulitan Resep")
         difficulty_counts = df_filtered["difficulty"].value_counts()
-        fig1, ax1 = plt.subplots(figsize=(7, 7))
+        fig1, ax1 = plt.subplots(figsize=(5, 5))
         ax1.pie(difficulty_counts, labels=difficulty_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("viridis", len(difficulty_counts)))
         ax1.axis("equal")
         st.pyplot(fig1)
@@ -122,7 +122,7 @@ elif page == "📊 Dashboard Analisis":
     with col4:
         st.subheader("🥦 Preferensi Konsumsi")
         diet_counts = df_filtered["diet"].value_counts()
-        fig2, ax2 = plt.subplots(figsize=(7, 7))
+        fig2, ax2 = plt.subplots(figsize=(5, 5))
         ax2.pie(diet_counts, labels=diet_counts.index, autopct="%1.1f%%", startangle=140, colors=["#ffcc99", "#c2c2f0"])
         ax2.axis("equal")
         st.pyplot(fig2)
