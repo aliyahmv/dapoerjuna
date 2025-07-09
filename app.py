@@ -12,7 +12,7 @@ st.set_page_config("DAPOERJUNA", "🍳", layout="wide")
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("df_resep_cleaned.csv")
+    return pd.read_csv("database/df_resep_cleaned.csv")
 
 df = load_data()
 
@@ -23,7 +23,7 @@ st.sidebar.markdown("---")
 
 if page == "🤖 Chatbot":
     st.sidebar.header("Mood Chef Juna")
-    chef_mood = st.sidebar.selectbox("Pilih Mood:", ["Chef Juna Mengayomi 😇", "Chef Juna Galak 😈", "Random Mood 🎝️"])
+    chef_mood = st.sidebar.selectbox("Pilih Mood:", ["Chef Juna Mengayomi 😇", "Chef Juna Galak 😈", "Random Mood 🎭"])
     if st.sidebar.button("🗑️ Hapus Riwayat Chat"):
         st.session_state.messages = []
         st.session_state.memory = memory
@@ -31,7 +31,7 @@ if page == "🤖 Chatbot":
 
 elif page == "📊 Dashboard Analisis":
     st.sidebar.header("🔍 Filter Dashboard")
-    selected_difficulty = st.sidebar.selectbox("Pilih Tingkat Kesulitan:", ["Semua Tingkat", "mudah", "sedang", "cukup rumit"], key="dashboard_filter")
+    selected_difficulty = st.sidebar.selectbox("Pilih Tingkat Kesulitan:", ["Semua Tingkat", "Mudah", "Sedang", "Cukup Rumit"], key="dashboard_filter")
 
 # ==================== MAIN CONTENT ====================
 if page == "🤖 Chatbot":
@@ -44,14 +44,14 @@ if page == "🤖 Chatbot":
     </p><p style='font-size:17px;color:#444'>
     Tanya resep biar masakan enak, bingung mau masak apa, atau biar dimarahin Chef Juna? Semuanya bisa di sini!
     <br><br>
-    📊 <strong>Analisis tren resep favorit untuk inspirasi menu dan ide kuliner kreatif, serta membantu keputusan bisnis kulinermu!</strong><br>
+    📊 <strong>Analisis tren resep favorit untuk inspirasi menu dan ide kuliner kreatif serta membantu keputusan bisnis kulinermu!</strong><br>
     📚 <strong>Dilengkapi informasi tambahan untuk UMKM kuliner.</strong>
     """, unsafe_allow_html=True)
 
     with st.expander("🤯 Bingung? Coba tanya kayak gini dulu:"):
         st.markdown("""
         * _"Gimana sih cara bikin ayam geprek yang kriuk di luar, juicy di dalam?"_
-        * _"Berikan saya resep yang paling banyak disukai"_
+        * _"Berikan saya resep yang paling banyak disukai."_
         * _"Chef Juna, aku mau resep makanan yang mudah dan cocok untuk diet vegan."_
         """)
     st.markdown("---")
@@ -81,7 +81,7 @@ if page == "🤖 Chatbot":
                 mood_map = {
                     "Chef Juna Mengayomi 😇": "baik",
                     "Chef Juna Galak 😈": "galak",
-                    "Random Mood 🎝️": "random"
+                    "Random Mood 🎭": "random"
                 }
                 init_state = {
                     "messages": [f"User: {prompt}"],
@@ -114,7 +114,7 @@ elif page == "📊 Dashboard Analisis":
     with col3:
         st.subheader("📌 Tingkat Kesulitan Resep")
         difficulty_counts = df_filtered["difficulty"].value_counts()
-        fig1, ax1 = plt.subplots(figsize=(7, 5))
+        fig1, ax1 = plt.subplots(figsize=(7, 7))
         ax1.pie(difficulty_counts, labels=difficulty_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("viridis", len(difficulty_counts)))
         ax1.axis("equal")
         st.pyplot(fig1)
@@ -122,8 +122,10 @@ elif page == "📊 Dashboard Analisis":
     with col4:
         st.subheader("🥦 Preferensi Konsumsi")
         diet_counts = df_filtered["diet"].value_counts()
-        fig2, ax2 = plt.subplots(figsize=(7, 5))
-        ax2.pie(diet_counts, labels=diet_counts.index, autopct="%1.1f%%", startangle=140, colors=["#ffcc99", "#c2c2f0"], wedgeprops={'width': 0.4})
+        fig2, ax2 = plt.subplots(figsize=(7, 7))
+        ax2.pie(diet_counts, labels=diet_counts.index, autopct="%1.1f%%", startangle=140, colors=["#ffcc99", "#c2c2f0"])
+        st.pyplot(fig2)
+        ax2.axis("equal")
         st.pyplot(fig2)
 
     st.markdown("---")
@@ -147,10 +149,10 @@ elif page == "📊 Dashboard Analisis":
         st.pyplot(fig4)
 
     st.markdown("---")
-    st.subheader("🔥 Top 5 Resep Terpopuler")
-    top5 = df_filtered.sort_values(by='loves', ascending=False).head(5)
+    st.subheader("🔥 Top 3 Resep Terpopuler")
+    top3 = df_filtered.sort_values(by='loves', ascending=False).head(3)
     fig5, ax5 = plt.subplots(figsize=(10, 6))
-    sns.barplot(x='loves', y='title', data=top5, palette='magma', ax=ax5, orient='h')
+    sns.barplot(x='loves', y='title', data=top3, palette='magma', ax=ax5, orient='h')
     ax5.set_xlabel("Jumlah Loves", fontsize=12)
     ax5.set_ylabel("Nama Resep", fontsize=12)
     st.pyplot(fig5)
@@ -169,7 +171,7 @@ elif page == "📚 Informasi UMKM":
     st.markdown("""
     - [GoFood](https://gofood.co.id/)
     - [GrabFood](https://grab.com/id/)
-    - [Shopee Food](https://shopee.co.id/m/shopeefood)
+    - [ShopeeFood](https://shopee.co.id/m/shopeefood)
     - [Tokopedia](https://www.tokopedia.com/)
     """)
 
