@@ -12,7 +12,7 @@ st.set_page_config("DAPOERJUNA", "🍳", layout="wide")
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("database/df_resep_cleaned.csv")
+    return pd.read_csv("df_resep_cleaned.csv")
 
 df = load_data()
 
