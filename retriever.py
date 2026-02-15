@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.schema import Document
 from tools import df, build_block
